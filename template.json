@@ -1,6 +1,6 @@
 {
     "push": {
-      "name": "stissot/ubuntu-server-1404",
+      "name": "Ecodev/ubuntu-server-1404",
       "vcs": true
     },
     "variables": {
@@ -98,7 +98,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "vmware_desktop",
-                "version": "0.2"
+                "version": "0.3"
             }
         },
         {
@@ -108,7 +108,7 @@
             "artifact_type": "vagrant.box",
             "metadata": {
                 "provider": "virtualbox",
-                "version": "0.2"
+                "version": "0.3"
             }
         }]
     ]
