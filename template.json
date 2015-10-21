@@ -62,11 +62,11 @@
         "type": "vagrant"
       },
       {
-        "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+        "artifact": "Ecodev/ubuntu-server-1404",
         "artifact_type": "vagrant.box",
         "metadata": {
           "provider": "vmware_desktop",
-          "version": "0.3"
+          "version": "0.4"
         },
         "only": [
           "vmware-iso"
@@ -74,11 +74,11 @@
         "type": "atlas"
       },
       {
-        "artifact": "{{user `atlas_username`}}/{{user `atlas_name`}}",
+        "artifact": "Ecodev/ubuntu-server-1404",
         "artifact_type": "vagrant.box",
         "metadata": {
           "provider": "virtualbox",
-          "version": "0.3"
+          "version": "0.4"
         },
         "only": [
           "virtualbox-iso"
@@ -113,10 +113,5 @@
   "push": {
     "name": "Ecodev/ubuntu-server-1404",
     "vcs": true
-  },
-  "variables": {
-    "atlas_name": "{{env `ATLAS_NAME`}}",
-    "atlas_username": "{{env `ATLAS_USERNAME`}}"
   }
 }
-
