@@ -4,4 +4,4 @@
 mkdir /etc/chef
 chown root:root /etc/chef
 chmod 755 /etc/chef
-curl -L https://www.chef.io/chef/install.sh | sudo bash -s -- -v 12.7.0
+curl -L https://www.chef.io/chef/install.sh | sudo bash -s -- -v 12.13.37
