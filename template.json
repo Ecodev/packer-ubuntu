@@ -39,7 +39,7 @@
         "artifact_type": "vagrant.box",
         "metadata": {
           "provider": "virtualbox",
-          "version": "1.4",
+          "version": "2.0",
           "description": "This box includes chef-client 12.13.37, Ubuntu Server 16.04.1 and Virtualbox Guest Additions"
         },
         "only": [
