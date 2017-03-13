@@ -18,7 +18,7 @@
       "http_directory": "http",
       "iso_checksum": "29a8b9009509b39d542ecb229787cdf48f05e739a932289de9e9858d7c487c80",
       "iso_checksum_type": "sha256",
-      "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04.1-server-amd64.iso",
+      "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04.2-server-amd64.iso",
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant'|sudo -S bash 'shutdown.sh'",
       "ssh_password": "vagrant",
       "ssh_port": 22,
