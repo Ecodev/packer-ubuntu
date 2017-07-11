@@ -1,4 +1,10 @@
 {
+  "variables": {
+    "vagrantcloud_token": "{{env `VAGRANTCLOUD_TOKEN`}}",
+    "version": "2.3.{{timestamp}}",
+    "description": "This box includes chef-client 12.21.3, Ubuntu Server 16.04.2, Virtualbox Guest Additions 5.1.22 and useful base APT packages"
+  },
+  "description": "{{user `description`}}",
   "builders": [
     {
       "boot_command": [
@@ -12,6 +18,8 @@
       ],
       "boot_wait": "10s",
       "disk_size": 20480,
+      "guest_additions_url": "/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso",
+      "guest_additions_mode": "upload",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "Ubuntu_64",
       "headless": true,
@@ -31,21 +39,16 @@
   "post-processors": [
     [
       {
-        "keep_input_artifact": false,
-        "type": "vagrant"
+        "type": "vagrant",
+        "output": "output.box"
       },
       {
-        "artifact": "Ecodev/ubuntu-server-1604",
-        "artifact_type": "vagrant.box",
-        "metadata": {
-          "provider": "virtualbox",
-          "version": "2.2",
-          "description": "This box includes chef-client 12.19.36, Ubuntu Server 16.04.2 and Virtualbox Guest Additions"
-        },
-        "only": [
-          "virtualbox-iso"
-        ],
-        "type": "atlas"
+        "type": "vagrant-cloud",
+        "only": ["virtualbox-iso"],
+        "access_token": "{{user `vagrantcloud_token`}}",
+        "box_tag": "Ecodev/ubuntu-server-1604",
+        "version_description": "{{user `description`}}",
+        "version": "{{user `version`}}"
       }
     ]
   ],

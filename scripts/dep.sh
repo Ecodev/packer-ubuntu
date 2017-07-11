@@ -4,6 +4,4 @@
 
 apt-get -y update
 
-apt-get -y install curl
-
-# You can install anything you need here.
+apt-get -y install unattended-upgrades unzip curl finger whois sysstat rsync screen mc tig pdftk make acl bash mosh tcpdump keychain telnet wget subversion htop git
