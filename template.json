@@ -1,8 +1,8 @@
 {
   "variables": {
     "vagrantcloud_token": "{{env `VAGRANTCLOUD_TOKEN`}}",
-    "version": "3.0.{{timestamp}}",
-    "description": "This box includes chef-client 13.8.5, Ubuntu Server 16.04.4, Virtualbox Guest Additions 5.2.8 and common APT packages to speed up Chef converge"
+    "version": "1.0.{{timestamp}}",
+    "description": "This box includes chef-client 14.4.56, Ubuntu Server 18.04.1, Virtualbox Guest Additions 5.2.18 and common APT packages to speed up Chef converge"
   },
   "description": "{{user `description`}}",
   "builders": [
@@ -21,13 +21,13 @@
       "guest_additions_url": "/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso",
       "guest_additions_mode": "upload",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-      "guest_additions_sha256": "80b6b4a6c6789fd5957d07562dd2bdd89dd2abd99cb588e15b784ed89b680813",
+      "guest_additions_sha256": "1a56b8771c5a865f10b44b8d3b821e8404ea2f10978675e5cdc405525de7b5eb",
       "guest_os_type": "Ubuntu_64",
       "headless": true,
       "http_directory": "http",
-      "iso_checksum": "0a03608988cfd2e50567990dc8be96fb3c501e198e2e6efcb846d89efc7b89f2",
+      "iso_checksum": "a5b0ea5918f850124f3d72ef4b85bda82f0fcd02ec721be19c1a6952791c8ee8",
       "iso_checksum_type": "sha256",
-      "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04.4-server-amd64.iso",
+      "iso_url": "http://cdimage.ubuntu.com/ubuntu/releases/18.04/release/ubuntu-18.04.1-server-amd64.iso",
       "shutdown_command": "echo '/sbin/halt -h -p' > shutdown.sh; echo 'vagrant'|sudo -S bash 'shutdown.sh'",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -47,7 +47,7 @@
         "type": "vagrant-cloud",
         "only": ["virtualbox-iso"],
         "access_token": "{{user `vagrantcloud_token`}}",
-        "box_tag": "Ecodev/ubuntu-server-1604",
+        "box_tag": "Ecodev/ubuntu-server-1804",
         "version_description": "{{user `description`}}",
         "version": "{{user `version`}}"
       }
@@ -73,7 +73,7 @@
     }
   ],
   "push": {
-    "name": "Ecodev/ubuntu-server-1604",
+    "name": "Ecodev/ubuntu-server-1804",
     "vcs": true
   }
 }
