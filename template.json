@@ -2,7 +2,7 @@
   "variables": {
     "vagrantcloud_token": "{{env `VAGRANTCLOUD_TOKEN`}}",
     "version": "1.0.{{timestamp}}",
-    "description": "This box includes chef-client 14.4.56, Ubuntu Server 18.04.1, Virtualbox Guest Additions 5.2.18 and common APT packages to speed up Chef converge"
+    "description": "This box includes chef-client 14.5.27, Ubuntu Server 18.04.1, Virtualbox Guest Additions 5.2.18 and common APT packages to speed up Chef converge"
   },
   "description": "{{user `description`}}",
   "builders": [
@@ -63,9 +63,9 @@
       "scripts": [
         "scripts/base.sh",
         "scripts/virtualbox.sh",
+        "scripts/dep.sh",
         "scripts/chef.sh",
         "scripts/vagrant.sh",
-        "scripts/dep.sh",
         "scripts/cleanup.sh",
         "scripts/zerodisk.sh"
       ],
