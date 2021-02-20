@@ -43,8 +43,7 @@
     "post-processors": [
         [
             {
-                "type": "vagrant",
-                "output": "output.box"
+                "type": "vagrant"
             },
             {
                 "type": "vagrant-cloud",
@@ -83,25 +82,19 @@
         }
     ],
     "variables": {
-        "box_basename": "ubuntu-20.04-live",
         "build_directory": "builds",
-        "build_timestamp": "{{isotime \"20060102150405\"}}",
         "cpus": "2",
         "disk_size": "65536",
-        "git_revision": "__unknown_git_revision__",
         "guest_additions_url": "",
         "headless": "",
         "http_directory": "{{template_dir}}/http",
         "http_proxy": "{{env `http_proxy`}}",
         "https_proxy": "{{env `https_proxy`}}",
-        "hyperv_generation": "2",
-        "hyperv_switch": "bento",
         "iso_checksum": "d1f2bf834bbe9bb43faf16f9be992a6f3935e65be0edece1dee2aa6eb1767423",
         "iso_name": "ubuntu-20.04.2-live-server-amd64.iso",
         "memory": "1024",
         "mirror": "http://releases.ubuntu.com",
         "mirror_directory": "20.04",
-        "name": "ubuntu-20.04-live",
         "no_proxy": "{{env `no_proxy`}}",
         "preseed_path": "preseed.cfg",
         "template": "ubuntu-20.04-live-amd64",
