@@ -1,2 +1,3 @@
-packer_cache
+/builds/
+/packer_cache/
 .DS_Store
