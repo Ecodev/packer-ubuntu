@@ -64,6 +64,7 @@
                 "{{template_dir}}/scripts/vagrant.sh",
                 "{{template_dir}}/_common/virtualbox.sh",
                 "{{template_dir}}/scripts/cleanup.sh",
+                "{{template_dir}}/scripts/ecodev_deps.sh",
                 "{{template_dir}}/_common/minimize.sh"
             ],
             "type": "shell"
