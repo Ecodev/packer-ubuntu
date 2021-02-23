@@ -83,6 +83,7 @@
         }
     ],
     "variables": {
+        "description": "This box includes chef-client 16.10.17, Ubuntu Live Server 20.04.2, Virtualbox Guest Additions and common APT packages to speed up Chef converge",
         "build_directory": "builds",
         "cpus": "2",
         "disk_size": "65536",
