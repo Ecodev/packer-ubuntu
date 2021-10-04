@@ -9,5 +9,5 @@ To build locally:
 2. Set the token as the environment variable `VAGRANTCLOUD_TOKEN`
 3. Run:
 ```sh
-packer build template.json
+packer build .
 ```
