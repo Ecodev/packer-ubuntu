@@ -39,4 +39,4 @@ chown root:root /etc/chef
 chmod 755 /etc/chef
 
 # Install Chef
-/usr/bin/curl -L https://www.chef.io/chef/install.sh | /usr/bin/sudo bash -s -- -v 16.10.17
+/usr/bin/curl -L https://www.chef.io/chef/install.sh | /usr/bin/sudo bash -s -- -v 16.16.13
