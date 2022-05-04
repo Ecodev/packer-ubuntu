@@ -1,3 +1,72 @@
+##################################################################################
+# VARIABLES
+##################################################################################
+
+variable "build_directory" {
+  type = string
+  default = "builds"
+}
+variable "cpus" {
+  type = number
+  default = 2
+}
+variable "description" {
+  type = string
+  default = "This box includes chef-client 16.18.0, Ubuntu Live Server 20.04.3, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
+}
+variable "disk_size" {
+  type = number
+  default = 65536
+}
+variable "guest_additions_url" {
+  type = string
+  default = ""
+}
+variable "headless" {
+  type = bool
+  default = false
+}
+variable "http_proxy" {
+  type = string
+  default = "${env("http_proxy")}"
+}
+variable "https_proxy" {
+  type = string
+  default = "${env("https_proxy")}"
+}
+variable "iso_checksum" {
+  type = string
+  default = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
+}
+variable "iso_name" {
+  type = string
+  default = "ubuntu-20.04.3-live-server-amd64.iso"
+}
+variable "memory" {
+  type = number
+  default = 1024
+}
+variable "mirror" {
+  type = string
+  default = "https://old-releases.ubuntu.com"
+}
+variable "mirror_directory" {
+  type = string
+  default = "releases/focal"
+}
+variable "no_proxy" {
+  type = string
+  default = "${env("no_proxy")}"
+}
+variable "preseed_path" {
+  type = string
+  default = "preseed.cfg"
+}
+variable "template" {
+  type = string
+  default = "ubuntu-20.04-live-amd64"
+}
+
 # "timestamp" template function replacement
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -9,6 +78,10 @@ locals {
   http_directory = "${path.root}/http"
   version        = "1.0.${local.timestamp}"
 }
+
+##################################################################################
+# SOURCE
+##################################################################################
 
 # source blocks are generated from your builders; a source can be referenced in
 # build blocks. A build block runs provisioner and post-processors on a
