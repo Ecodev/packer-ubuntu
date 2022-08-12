@@ -7,7 +7,12 @@ To build locally:
 
 1. Create a token on https://app.vagrantup.com/settings/security
 2. Set the token as the environment variable `VAGRANTCLOUD_TOKEN`
-3. Run:
+3. Install packer plugins:
 ```sh
-packer build template.pkr.hcl
+packer init .
 ```
+4. Build the box and automatically upload to https://app.vagrantup.com/Ecodev:
+```sh
+packer build .
+```
+~~~~

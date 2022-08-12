@@ -18,11 +18,11 @@ make \
 mc \
 mosh \
 net-tools \
+python-is-python3 \
 rsync \
-ruby2.7 \
-ruby2.7-dev \
+ruby3.0 \
+ruby3.0-dev \
 screen \
-subversion \
 sysstat \
 tcpdump \
 telnet \

@@ -1,3 +1,12 @@
+packer {
+  required_plugins {
+    vagrant = {
+      version = ">= 1.0.2"
+      source  = "github.com/hashicorp/vagrant"
+    }
+  }
+}
+
 ##################################################################################
 # VARIABLES
 ##################################################################################
@@ -12,7 +21,7 @@ variable "cpus" {
 }
 variable "description" {
   type = string
-  default = "This box includes chef-client 16.18.0, Ubuntu Live Server 20.04.3, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
+  default = "This box includes chef-client 16.18.0, Ubuntu Live Server 22.04.1, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
 }
 variable "disk_size" {
   type = number
@@ -36,11 +45,11 @@ variable "https_proxy" {
 }
 variable "iso_checksum" {
   type = string
-  default = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
+  default = "10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb"
 }
 variable "iso_name" {
   type = string
-  default = "ubuntu-20.04.3-live-server-amd64.iso"
+  default = "ubuntu-22.04.1-live-server-amd64.iso"
 }
 variable "memory" {
   type = number
@@ -48,11 +57,11 @@ variable "memory" {
 }
 variable "mirror" {
   type = string
-  default = "https://old-releases.ubuntu.com"
+  default = "https://releases.ubuntu.com"
 }
 variable "mirror_directory" {
   type = string
-  default = "releases/focal"
+  default = "releases/jammy"
 }
 variable "no_proxy" {
   type = string
@@ -65,6 +74,10 @@ variable "preseed_path" {
 variable "template" {
   type = string
   default = "ubuntu-20.04-live-amd64"
+}
+variable "vagrantcloud_token" {
+  type = string
+  default = "${env("VAGRANTCLOUD_TOKEN")}"
 }
 
 # "timestamp" template function replacement
@@ -89,9 +102,26 @@ locals {
 # https://www.packer.io/docs/templates/hcl_templates/blocks/source
 source "virtualbox-iso" "ubuntu" {
   boot_command = [
-    " <wait>", " <wait>", " <wait>", " <wait>", " <wait>", "<esc><wait>", "<f6><wait>", "<esc><wait>",
-    "<bs><bs><bs><bs><wait>", " autoinstall<wait5>", " ds=nocloud-net<wait5>",
-    ";s=http://<wait5>{{ .HTTPIP }}<wait5>:{{ .HTTPPort }}/<wait5>", " ---<wait5>", "<enter><wait5>"
+    " <wait>",
+    " <wait>",
+    " <wait>",
+    " <wait>",
+    " <wait>",
+    "c",
+    "<wait>",
+    "set gfxpayload=keep",
+    "<enter><wait>",
+    "linux /casper/vmlinuz quiet<wait>",
+    " autoinstall<wait>",
+    " ds=nocloud-net<wait>",
+    "\\;s=http://<wait>",
+    "{{.HTTPIP}}<wait>",
+    ":{{.HTTPPort}}/<wait>",
+    " ---",
+    "<enter><wait>",
+    "initrd /casper/initrd<wait>",
+    "<enter><wait>",
+    "boot<enter><wait>"
   ]
   boot_wait               = "5s"
   cpus                    = "${var.cpus}"
@@ -134,8 +164,7 @@ build {
     }
     post-processor "vagrant-cloud" {
       access_token        = "${var.vagrantcloud_token}"
-      box_tag             = "Ecodev/ubuntu-server-2004"
-      only                = ["virtualbox-iso"]
+      box_tag             = "Ecodev/ubuntu-server-2204"
       version             = "${local.version}"
       version_description = "${var.description}"
     }

@@ -45,14 +45,10 @@ echo "remove obsolete networking packages"
 apt-get -y purge ppp pppconfig pppoeconf;
 
 echo "remove packages we don't need"
-apt-get -y purge popularity-contest installation-report command-not-found friendly-recovery bash-completion fonts-ubuntu-font-family-console laptop-detect motd-news-config usbutils grub-legacy-ec2;
+apt-get -y purge popularity-contest command-not-found friendly-recovery bash-completion laptop-detect motd-news-config usbutils grub-legacy-ec2;
 
 echo "remove the console font"
 apt-get -y purge fonts-ubuntu-console || true;
-
-echo "removing command-not-found-data"
-# 19.10+ don't have this package so fail gracefully
-apt-get -y purge command-not-found-data || true;
 
 # Exclude the files we don't need w/o uninstalling linux-firmware
 echo "Setup dpkg excludes for linux-firmware"
