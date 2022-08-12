@@ -73,7 +73,7 @@ variable "preseed_path" {
 }
 variable "template" {
   type = string
-  default = "ubuntu-20.04-live-amd64"
+  default = "ubuntu-22.04-live-amd64"
 }
 variable "vagrantcloud_token" {
   type = string
