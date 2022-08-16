@@ -18,3 +18,10 @@ if grep -q -E "^[[:space:]]*GSSAPIAuthentication" "$SSHD_CONFIG"; then
 else
     echo "$GSSAPI" >>"$SSHD_CONFIG"
 fi
+
+PUBKEYACCEPTEDTYPES="PubkeyAcceptedKeyTypes +ssh-rsa"
+if grep -q -E "^[[:space:]]*PubkeyAcceptedKeyTypes" "$SSHD_CONFIG"; then
+    sed -i "s/^\s*GSSAPIAuthentication.*/${PUBKEYACCEPTEDTYPES}/" "$SSHD_CONFIG"
+else
+    echo "$PUBKEYACCEPTEDTYPES" >>"$SSHD_CONFIG"
+fi
