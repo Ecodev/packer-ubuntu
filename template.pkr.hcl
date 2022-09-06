@@ -21,7 +21,7 @@ variable "cpus" {
 }
 variable "description" {
   type = string
-  default = "This box includes chef-client 16.18.0, Ubuntu Live Server 22.04.1, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
+  default = "This box includes chef-client 17.10.0, Ubuntu Live Server 22.04.1, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
 }
 variable "disk_size" {
   type = number
