@@ -15,4 +15,3 @@ packer init .
 ```sh
 packer build .
 ```
-~~~~
