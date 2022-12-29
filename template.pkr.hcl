@@ -12,7 +12,7 @@ variable "cpus" {
 }
 variable "description" {
   type = string
-  default = "This box includes chef-client 16.18.0, Ubuntu Live Server 20.04.3, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
+  default = "This box includes chef-client 16.18.0, Ubuntu Live Server 20.04.4, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
 }
 variable "disk_size" {
   type = number
@@ -36,11 +36,11 @@ variable "https_proxy" {
 }
 variable "iso_checksum" {
   type = string
-  default = "f8e3086f3cea0fb3fefb29937ab5ed9d19e767079633960ccb50e76153effc98"
+  default = "28ccdb56450e643bad03bb7bcf7507ce3d8d90e8bf09e38f6bd9ac298a98eaad"
 }
 variable "iso_name" {
   type = string
-  default = "ubuntu-20.04.3-live-server-amd64.iso"
+  default = "ubuntu-20.04.4-live-server-amd64.iso"
 }
 variable "memory" {
   type = number
