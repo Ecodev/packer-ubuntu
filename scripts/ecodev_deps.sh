@@ -12,6 +12,7 @@ finger \
 git \
 gnupg \
 htop \
+iptables-persistent \
 keychain \
 logrotate \
 make \

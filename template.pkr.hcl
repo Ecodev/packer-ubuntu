@@ -12,7 +12,7 @@ variable "cpus" {
 }
 variable "description" {
   type = string
-  default = "This box includes chef-client 16.18.0, Ubuntu Live Server 20.04.4, Virtualbox Guest Additions and common APT packages to speed up Chef converge"
+  default = "This box includes Ubuntu Live Server 20.04.5, chef-client 16.18.30, Virtualbox 7.0 Guest Additions and common APT packages to speed up Chef converge"
 }
 variable "disk_size" {
   type = number
@@ -36,11 +36,11 @@ variable "https_proxy" {
 }
 variable "iso_checksum" {
   type = string
-  default = "28ccdb56450e643bad03bb7bcf7507ce3d8d90e8bf09e38f6bd9ac298a98eaad"
+  default = "5035be37a7e9abbdc09f0d257f3e33416c1a0fb322ba860d42d74aa75c3468d4"
 }
 variable "iso_name" {
   type = string
-  default = "ubuntu-20.04.4-live-server-amd64.iso"
+  default = "ubuntu-20.04.5-live-server-amd64.iso"
 }
 variable "memory" {
   type = number
@@ -88,12 +88,8 @@ locals {
 # source. Read the documentation for source blocks here:
 # https://www.packer.io/docs/templates/hcl_templates/blocks/source
 source "virtualbox-iso" "ubuntu" {
-  boot_command = [
-    " <wait>", " <wait>", " <wait>", " <wait>", " <wait>", "<esc><wait>", "<f6><wait>", "<esc><wait>",
-    "<bs><bs><bs><bs><wait>", " autoinstall<wait5>", " ds=nocloud-net<wait5>",
-    ";s=http://<wait5>{{ .HTTPIP }}<wait5>:{{ .HTTPPort }}/<wait5>", " ---<wait5>", "<enter><wait5>"
-  ]
-  boot_wait               = "5s"
+  boot_command = ["<wait>", "<esc><wait>", "<esc><wait>", "<f6><wait>", "<esc><wait>", "<bs><bs><bs><bs>", " autoinstall", " ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu/", " ---", "<enter><wait>"]
+  boot_wait               = "2s"
   cpus                    = "${var.cpus}"
   disk_size               = "${var.disk_size}"
   guest_additions_path    = "VBoxGuestAdditions_{{ .Version }}.iso"
