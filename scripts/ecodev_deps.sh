@@ -44,4 +44,4 @@ chown root:root /etc/cinc
 chmod 755 /etc/cinc
 
 # Install Cinc
-/usr/bin/curl -L https://omnitruck.cinc.sh/install.sh | /usr/bin/sudo bash -s -- -v 17.10.3
+/usr/bin/curl -L https://omnitruck.cinc.sh/install.sh | /usr/bin/sudo bash -s -- -v 17.10.165

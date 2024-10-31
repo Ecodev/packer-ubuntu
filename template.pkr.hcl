@@ -126,7 +126,7 @@ build {
     post-processor "vagrant-registry" {
       box_tag             = "Ecodev/ubuntu-server-2204"
       version             = "${local.version}"
-      version_description = "This box includes cinc-client 17.10.3, Ubuntu Live Server 22.04.5, Virtualbox 7.0 Guest Additions and common APT packages to speed up Cinc converge"
+      version_description = "This box includes cinc-client 17.10.165, Ubuntu Live Server 22.04.5, Virtualbox 7.0 Guest Additions and common APT packages to speed up Cinc converge"
     }
   }
 }
