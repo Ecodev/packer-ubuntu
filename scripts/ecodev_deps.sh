@@ -38,10 +38,10 @@ vim \
 wget \
 whois
 
-# Create the directory that will contain Chef configuration and keys
-mkdir /etc/chef
-chown root:root /etc/chef
-chmod 755 /etc/chef
+# Create the directory that will contain Cinc configuration and keys
+mkdir /etc/cinc
+chown root:root /etc/cinc
+chmod 755 /etc/cinc
 
-# Install Chef
-/usr/bin/curl -L https://www.chef.io/chef/install.sh | /usr/bin/sudo bash -s -- -v 17.10.3
+# Install Cinc
+/usr/bin/curl -L https://omnitruck.cinc.sh/install.sh | /usr/bin/sudo bash -s -- -v 17.10.3
