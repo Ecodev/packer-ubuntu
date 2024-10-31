@@ -2,6 +2,10 @@
 
 # Add all kind of Ecodev specific dependencies
 
+# To avoid blocking on iptables-persistent interactive question during install
+echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
+
 # This should be kept in sync with chef-base/attributes/default.rb
 apt-get -y install \
 acl \

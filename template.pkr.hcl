@@ -15,30 +15,6 @@ packer {
 # VARIABLES
 ##################################################################################
 
-variable "build_directory" {
-  type = string
-  default = "builds"
-}
-variable "cpus" {
-  type = number
-  default = 2
-}
-variable "description" {
-  type = string
-  default = "This box includes chef-client 17.10.3, Ubuntu Live Server 22.04.1, Virtualbox 7.0 Guest Additions and common APT packages to speed up Chef converge"
-}
-variable "disk_size" {
-  type = number
-  default = 65536
-}
-variable "guest_additions_url" {
-  type = string
-  default = ""
-}
-variable "headless" {
-  type = bool
-  default = false
-}
 variable "http_proxy" {
   type = string
   default = "${env("http_proxy")}"
@@ -47,41 +23,13 @@ variable "https_proxy" {
   type = string
   default = "${env("https_proxy")}"
 }
-variable "iso_checksum" {
-  type = string
-  default = "10f19c5b2b8d6db711582e0e27f5116296c34fe4b313ba45f9b201a5007056cb"
-}
-variable "iso_name" {
-  type = string
-  default = "ubuntu-22.04.1-live-server-amd64.iso"
-}
-variable "memory" {
-  type = number
-  default = 1024
-}
-variable "mirror" {
-  type = string
-  default = "https://releases.ubuntu.com"
-}
-variable "mirror_directory" {
-  type = string
-  default = "releases/jammy"
-}
 variable "no_proxy" {
   type = string
   default = "${env("no_proxy")}"
 }
-variable "preseed_path" {
-  type = string
-  default = "preseed.cfg"
-}
 variable "template" {
   type = string
   default = "ubuntu-22.04-live-amd64"
-}
-variable "vagrantcloud_token" {
-  type = string
-  default = "${env("VAGRANTCLOUD_TOKEN")}"
 }
 
 # "timestamp" template function replacement
@@ -92,8 +40,7 @@ locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 # Read the documentation for locals blocks here:
 # https://www.packer.io/docs/templates/hcl_templates/blocks/locals
 locals {
-  http_directory = "${path.root}/http"
-  version        = "1.0.${local.timestamp}"
+  version = "1.0.${local.timestamp}"
 }
 
 ##################################################################################
@@ -128,23 +75,22 @@ source "virtualbox-iso" "ubuntu" {
     "boot<enter><wait>"
   ]
   boot_wait               = "5s"
-  cpus                    = "${var.cpus}"
-  disk_size               = "${var.disk_size}"
+  cpus                    = 2
+  disk_size               = 65536
   guest_additions_path    = "VBoxGuestAdditions_{{ .Version }}.iso"
-  guest_additions_url     = "${var.guest_additions_url}"
   guest_os_type           = "Ubuntu_64"
   hard_drive_interface    = "sata"
-  headless                = "${var.headless}"
-  http_directory          = "${local.http_directory}"
-  iso_checksum            = "${var.iso_checksum}"
-  iso_url                 = "${var.mirror}/${var.mirror_directory}/${var.iso_name}"
-  memory                  = "${var.memory}"
-  output_directory        = "${var.build_directory}/packer-${var.template}-virtualbox"
+  headless                = false
+  http_directory          = "${path.root}/http"
+  iso_url                 = "https://releases.ubuntu.com/jammy/ubuntu-22.04.5-live-server-amd64.iso"
+  iso_checksum            = "file:https://releases.ubuntu.com/jammy/SHA256SUMS"
+  memory                  = 2048
+  output_directory        = "builds/packer-${var.template}-virtualbox"
   sata_port_count         = "4"
-  shutdown_command        = "echo 'vagrant' | sudo -S shutdown -P now"
+  shutdown_command        = "echo 'vagrant' | sudo -S /sbin/halt -h -p"
   ssh_password            = "vagrant"
   ssh_port                = 22
-  ssh_timeout             = "10000s"
+  ssh_timeout             = "15m"
   ssh_username            = "vagrant"
   virtualbox_version_file = ".vbox_version"
   vm_name                 = "${var.template}"
@@ -160,17 +106,27 @@ build {
     environment_vars  = ["HOME_DIR=/home/vagrant", "http_proxy=${var.http_proxy}", "https_proxy=${var.https_proxy}", "no_proxy=${var.no_proxy}"]
     execute_command   = "echo 'vagrant' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
-    scripts           = ["${path.root}/scripts/update.sh", "${path.root}/_common/sshd.sh", "${path.root}/scripts/networking.sh", "${path.root}/scripts/sudoers.sh", "${path.root}/scripts/vagrant.sh", "${path.root}/_common/virtualbox.sh", "${path.root}/scripts/cleanup.sh", "${path.root}/scripts/ecodev_deps.sh", "${path.root}/_common/minimize.sh"]
+    scripts           = [
+      "${path.root}/scripts/update.sh",
+      "${path.root}/_common/sshd.sh",
+      "${path.root}/scripts/networking.sh",
+      "${path.root}/scripts/sudoers.sh",
+      "${path.root}/_common/vagrant.sh",
+      "${path.root}/scripts/systemd.sh",
+      "${path.root}/_common/virtualbox.sh",
+      "${path.root}/scripts/cleanup.sh",
+      "${path.root}/scripts/ecodev_deps.sh",
+      "${path.root}/_common/minimize.sh"
+    ]
   }
 
   post-processors {
     post-processor "vagrant" {
     }
-    post-processor "vagrant-cloud" {
-      access_token        = "${var.vagrantcloud_token}"
+    post-processor "vagrant-registry" {
       box_tag             = "Ecodev/ubuntu-server-2204"
       version             = "${local.version}"
-      version_description = "${var.description}"
+      version_description = "This box includes chef-client 17.10.3, Ubuntu Live Server 22.04.5, Virtualbox 7.0 Guest Additions and common APT packages to speed up Chef converge"
     }
   }
 }
